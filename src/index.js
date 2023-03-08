@@ -6,20 +6,14 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 const port = process.env.PORT || 5000
-
-/*
-
-    dbusername = recipeapp
-    dbuserpass = jHJo6hqr1Ur0DELp
-
-*/
+require('dotenv').config()
 
 app.get('/',(req,res)=>{
     res.send("Server Started")
 })
 
 
-const uri = "mongodb+srv://recipeapp:jHJo6hqr1Ur0DELp@cluster0.mtnbd39.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.mtnbd39.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run(){
